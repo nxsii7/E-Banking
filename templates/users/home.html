@@ -1,0 +1,32 @@
+{% load static %}
+
+{% block content %}
+<!-- Load fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Halis:wght@700&display=swap" rel="stylesheet">
+
+<div style="position: relative; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh; text-align: center; font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #e0f7fa, #ffffff); overflow: hidden;">
+
+  <!-- Floating circles for decoration -->
+  <div style="position: absolute; width: 250px; height: 250px; border-radius: 50%; background: #00b89433; top: -60px; left: -60px;"></div>
+  <div style="position: absolute; width: 200px; height: 200px; border-radius: 50%; background: #004aad33; bottom: -50px; right: -50px;"></div>
+
+  <!-- Logo -->
+  <img src="{% static 'paylance.png' %}" alt="PayLance Logo" style="width: 250px; height: auto; margin-bottom: 5px;"/>
+
+  <!-- Title using Halis font -->
+  <h1 style="font-family: 'Halis', sans-serif; color: #004aad; font-size: 110px; font-weight: 700; margin-top: 0; margin-bottom: 5px; text-shadow: 1px 1px 6px #aaa;">
+    PayLance
+  </h1>
+
+
+  <!-- Get Started button at top-right -->
+  <a href="{% url 'login' %}" 
+     style="position: absolute; top: 20px; right: 20px; background-color: #00b894; color: #fff; padding: 14px 28px; border-radius: 25px; text-decoration: none; font-weight: 600; transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.25); font-family: 'Inter', sans-serif;">
+     Next
+  </a>
+
+</div>
+{% endblock %}

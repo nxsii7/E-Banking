@@ -1,0 +1,90 @@
+{% extends 'home_base.html' %}
+
+{% block title %}Register - PayLance{% endblock %}
+
+{% block content %}
+  <style>
+    .form {
+      width: 350px;
+      margin: 0 auto;
+      text-align: center;
+      transform: translateY(-30px); /* moves the form slightly higher */
+    }
+
+    .form h2 {
+      font-size: 28px;
+      margin-bottom: 6px;
+      color: #063f89ff;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .form input {
+      width: 100%;
+      padding: 12px;
+      margin: 6px 0;
+      border: 1px solid #000;
+      border-radius: 20px;
+      outline: none;
+      font-size: 16px;
+    }
+
+    .form button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 6px;
+      border: none;
+      border-radius: 20px;
+      background: #004aad;
+      color: white;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .form button:hover {
+      background: #003a8c;
+    }
+
+    .login-text {
+      margin-top: 10px;
+      font-size: 15px;
+      color: #333;
+    }
+
+    .login-text a {
+      color: #004aad;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .login-text a:hover {
+      text-decoration: underline;
+    }
+
+    /* Perfect vertical alignment */
+    main {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: calc(100vh - 120px);
+    }
+  </style>
+
+  <!-- Register Form -->
+  <div class="form">
+    <h2>Register</h2>
+
+    <input type="text" placeholder="FULL NAME">
+    <input type="email" placeholder="EMAIL">
+    <input type="password" placeholder="PASSWORD">
+    <input type="password" placeholder="CONFIRM PASSWORD">
+    
+    <button type="submit">Sign Up</button>
+
+    <div class="login-text">
+      Already have an account? <a href="{% url 'login' %}">Sign In</a>
+    </div>
+  </div>
+{% endblock %}

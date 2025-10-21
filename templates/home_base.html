@@ -1,0 +1,164 @@
+{% load static %}
+<!DOCTYPE html>  
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}PayLance{% endblock %}</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+      overflow: hidden; /* disables scrolling */
+      background-color: #ffffff;
+      color: #000;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+      background-color: #ffffff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      flex-shrink: 0;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: #004aad;
+    }
+
+    .logo img {
+      height: 32px;
+      display: block;
+    }
+
+    nav {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 40px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #004aad;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: 0.3s;
+    }
+
+    nav ul li a:hover,
+    nav ul li a.active {
+      border-bottom: 2px solid #004aad;
+      padding-bottom: 3px;
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 15px;
+    }
+
+    .nav-buttons button {
+      background-color: #004aad;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 10px 25px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .nav-buttons button:hover {
+      background-color: #0066ff;
+    }
+
+    .nav-buttons .get-started {
+      background-color: #00b894;
+    }
+
+    .nav-buttons .get-started:hover {
+      background-color: #00d6a0;
+    }
+
+    /* ===== MAIN CONTENT ===== */
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 10px;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: #ffffff;
+      color: #000;
+      text-align: center;
+      padding: 10px 0;
+      font-size: 0.9rem;
+      box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ===== HEADER ===== -->
+  <header>
+    <div class="logo">
+      <img src="{% static 'paylance.png' %}" alt="PayLance Logo" />
+      <span>PayLance</span>
+    </div>
+
+    <div class="nav-buttons">
+      <button onclick="location.href='{% url 'login' %}'">Sign In</button>
+      <button onclick="location.href='{% url 'register' %}'">Sign Up</button>
+      <button class="get-started" onclick="location.href='{% url 'confirmation' %}'">Get Started</button>
+    </div>
+  </header>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main>
+    {% block content %}
+    <!-- Child content here -->
+    {% endblock %}
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    © 2025 PayLance. All rights reserved.
+  </footer>
+</body>
+</html>

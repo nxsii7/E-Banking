@@ -1,0 +1,88 @@
+{% extends "pin_base.html" %}
+{% load static %}
+
+{% block title %}Enter PIN - PayLance{% endblock %}
+
+{% block content %}
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+
+<div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 70vh; font-family: 'Roboto', sans-serif;">
+
+  <div style="width: 320px; padding: 30px; border-radius: 12px; border: 1px solid #ccc; text-align: center;">
+    <h3 style="font-size: 20px; font-weight: 600; margin-bottom: 20px;">Enter Your PIN</h3>
+    <p style="font-size: 14px; color: #555; margin-bottom: 25px;">Please enter your 4-digit PIN to access your account</p>
+
+    <!-- PIN Input Boxes -->
+    <div id="pin-container" style="display: flex; justify-content: space-between; margin-bottom: 25px;">
+      <input type="password" maxlength="1" class="pin-box" style="width: 60px; padding: 12px; font-size: 24px; text-align: center; border: 1px solid #ccc; border-radius: 10px;">
+      <input type="password" maxlength="1" class="pin-box" style="width: 60px; padding: 12px; font-size: 24px; text-align: center; border: 1px solid #ccc; border-radius: 10px;">
+      <input type="password" maxlength="1" class="pin-box" style="width: 60px; padding: 12px; font-size: 24px; text-align: center; border: 1px solid #ccc; border-radius: 10px;">
+      <input type="password" maxlength="1" class="pin-box" style="width: 60px; padding: 12px; font-size: 24px; text-align: center; border: 1px solid #ccc; border-radius: 10px;">
+    </div>
+
+    <!-- Next Button -->
+    <a href="{% url 'account' %}" 
+       style="display: block; width: 100%; text-align: center; background-color: #004aad; color: #fff; padding: 12px; border-radius: 25px; font-weight: 500; text-decoration: none; margin-bottom: 15px;">
+       NEXT
+    </a>
+
+    <p style="margin-top: 15px; font-size: 12px; color: #00b894;">Forgot PIN?</p>
+  </div>
+</div>
+
+<!-- Virtual Keypad Popup -->
+<div id="keypad-popup" style="position: fixed; right: 20px; top: 50%; transform: translateY(-50%); 
+                             background: #f9f9f9; border: 1px solid #ccc; border-radius: 12px; padding: 20px; 
+                             display: none; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+  <div style="display: grid; grid-template-columns: repeat(3, 60px); gap: 10px; justify-content: center;">
+    {% for num in "123456789" %}
+    <button class="key-btn" style="height:60px; font-size:20px; border-radius:10px; border:1px solid #ccc; background:#f2f2f2; cursor:pointer;">{{ num }}</button>
+    {% endfor %}
+    <div></div>
+    <button class="key-btn" style="height:60px; font-size:20px; border-radius:10px; border:1px solid #ccc; background:#f2f2f2; cursor:pointer;">0</button>
+    <button id="backspace" style="height:60px; font-size:18px; border-radius:10px; border:1px solid #ccc; background:#f2f2f2; cursor:pointer;">⌫</button>
+  </div>
+</div>
+
+<script>
+const pinBoxes = document.querySelectorAll('.pin-box');
+const keypadPopup = document.getElementById('keypad-popup');
+const keyButtons = document.querySelectorAll('.key-btn');
+const backspace = document.getElementById('backspace');
+
+let currentIndex = 0;
+
+// Show keypad popup when any input is focused
+pinBoxes.forEach(box => {
+  box.addEventListener('focus', () => {
+    keypadPopup.style.display = 'block';
+    currentIndex = Array.from(pinBoxes).findIndex(b => b.value === '');
+  });
+});
+
+// Hide keypad if clicked outside
+document.addEventListener('click', function(e) {
+  if(!keypadPopup.contains(e.target) && !Array.from(pinBoxes).includes(e.target)) {
+    keypadPopup.style.display = 'none';
+  }
+});
+
+// Clicking numbers fills the PIN boxes
+keyButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    if(currentIndex < 4){
+      pinBoxes[currentIndex].value = button.innerText;
+      currentIndex++;
+    }
+  });
+});
+
+// Backspace functionality
+backspace.addEventListener('click', () => {
+  if(currentIndex > 0){
+    currentIndex--;
+    pinBoxes[currentIndex].value = '';
+  }
+});
+</script>
+{% endblock %}
